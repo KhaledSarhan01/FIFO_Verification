@@ -6,6 +6,7 @@
 package shared_pkg;
     parameter FIFO_WIDTH = 16;
     parameter FIFO_DEPTH = 8;
+    int correct_count , error_count;
 
     class FIFO_transaction;
         // Signals
@@ -135,8 +136,43 @@ package shared_pkg;
     endclass
 
     class FIFO_scoreboard;
-        function new();
-            
-        endfunction
+            bit wr_ack_ref, overflow_ref;
+            bit full_ref, empty_ref, almostfull_ref, almostempty_ref, underflow_ref;
+        // Functions
+            function new();
+                correct_count = 0;
+                error_count = 0;
+            endfunction
+            function void check_data(FIFO_transaction F_txn);
+                reference_model(F_txn);
+                if (F_txn.wr_ack != wr_ack_ref) begin
+                    $display("%t : wr_ack = %1b , wr_ack_ref = %1b",$time,F_txn.wr_ack,wr_ack_ref);
+                    error_count = error_count +1;
+                end else if(F_txn.overflow != overflow_ref )begin
+                    $display("%t : overflow = %1b , overflow_ref = %1b",$time,F_txn.overflow,overflow_ref);
+                    error_count = error_count +1;
+                end else if(F_txn.underflow != underflow_ref) begin
+                    $display("%t : underflow = %1b , underflow_ref = %1b",$time,F_txn.underflow,underflow_ref);
+                    error_count = error_count +1;
+                end else if (F_txn.full == full_ref ) begin
+                    $display("%t : full = %1b , full_ref = %1b",$time,F_txn.full,full_ref);
+                    error_count = error_count +1;
+                end else if (F_txn.empty != empty_ref ) begin
+                    $display("%t : empty = %1b , empty_ref = %1b",$time,F_txn.empty,empty_ref);
+                    error_count = error_count +1;
+                end else if (F_txn.almostempty != almostempty_ref) begin
+                    $display("%t : almostempty = %1b , almostempty_ref = %1b",$time,F_txn.almostempty,almostempty_ref);
+                    error_count = error_count +1;
+                end else if (F_txn.almostfull != almostfull_ref) begin
+                    $display("%t : almostfull = %1b , almostfull_ref = %1b",$time,F_txn.almostfull,almostfull_ref);
+                    error_count = error_count +1;
+                end else begin
+                    correct_count = correct_count + 1;
+                end
+            endfunction
+
+            function void reference_model(FIFO_transaction F_txn);
+                
+            endfunction
     endclass
 endpackage
