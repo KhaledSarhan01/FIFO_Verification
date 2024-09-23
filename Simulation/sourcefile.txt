@@ -1,0 +1,6 @@
+../Verification/Shared_Package.sv
+../Verification/interface.sv
+../Verification/monitor.sv
+../Verification/testbench.sv
+../Design/FIFO.sv
+../Verification/top.sv
