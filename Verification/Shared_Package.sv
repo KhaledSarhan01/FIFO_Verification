@@ -137,35 +137,28 @@ package shared_pkg;
     endclass
 
     class FIFO_scoreboard;
-            bit wr_ack_ref, overflow_ref;
-            bit full_ref, empty_ref, almostfull_ref, almostempty_ref, underflow_ref;
+            bit [FIFO_WIDTH-1:0] data_out_ref;
+
+            localparam max_fifo_addr = $clog2(FIFO_DEPTH);
+            reg [FIFO_WIDTH-1:0] mem_ref [FIFO_DEPTH-1:0];
+            reg [max_fifo_addr-1:0] wr_ptr_ref, rd_ptr_ref;
+            reg [max_fifo_addr:0] count_ref;
+                
         // Functions
             function new();
                 correct_count = 0;
                 error_count = 0;
+                for (int i = 0; i < FIFO_DEPTH; i++ ) begin
+                        mem_ref[i] = 0;
+                end
+                wr_ptr_ref = 0;
+                rd_ptr_ref = 0;
+                count_ref = 0;
             endfunction
             function void check_data(FIFO_transaction F_txn);
                 reference_model(F_txn);
-                if (F_txn.wr_ack != wr_ack_ref) begin
-                    $display("%t : wr_ack = %1b , wr_ack_ref = %1b",$time,F_txn.wr_ack,wr_ack_ref);
-                    error_count = error_count +1;
-                end else if(F_txn.overflow != overflow_ref )begin
-                    $display("%t : overflow = %1b , overflow_ref = %1b",$time,F_txn.overflow,overflow_ref);
-                    error_count = error_count +1;
-                end else if(F_txn.underflow != underflow_ref) begin
-                    $display("%t : underflow = %1b , underflow_ref = %1b",$time,F_txn.underflow,underflow_ref);
-                    error_count = error_count +1;
-                end else if (F_txn.full == full_ref ) begin
-                    $display("%t : full = %1b , full_ref = %1b",$time,F_txn.full,full_ref);
-                    error_count = error_count +1;
-                end else if (F_txn.empty != empty_ref ) begin
-                    $display("%t : empty = %1b , empty_ref = %1b",$time,F_txn.empty,empty_ref);
-                    error_count = error_count +1;
-                end else if (F_txn.almostempty != almostempty_ref) begin
-                    $display("%t : almostempty = %1b , almostempty_ref = %1b",$time,F_txn.almostempty,almostempty_ref);
-                    error_count = error_count +1;
-                end else if (F_txn.almostfull != almostfull_ref) begin
-                    $display("%t : almostfull = %1b , almostfull_ref = %1b",$time,F_txn.almostfull,almostfull_ref);
+                if (F_txn.data_out != data_out_ref) begin
+                    $display("%t : data_out = %d , data_out_ref = %d",$time,F_txn.data_out,data_out_ref);
                     error_count = error_count +1;
                 end else begin
                     correct_count = correct_count + 1;
@@ -173,7 +166,20 @@ package shared_pkg;
             endfunction
 
             function void reference_model(FIFO_transaction F_txn);
-                
+                if(!(F_txn.rst_n))begin
+                    for (int i = 0; i < FIFO_DEPTH; i++ ) begin
+                        mem_ref[i] = 0;
+                    end
+                    data_out_ref = 0;
+                end else begin
+                    if (F_txn.wr_en && count_ref < FIFO_DEPTH) begin
+                        mem_ref[wr_ptr_ref] = F_txn.data_in;
+                        count_ref = count_ref +1;
+                    end else if (F_txn.rd_en && count_ref != 0) begin
+                        data_out_ref = mem_ref[rd_ptr_ref];
+                        count_ref = count_ref -1;
+                    end 
+                end
             endfunction
     endclass
 endpackage
