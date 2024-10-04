@@ -3,10 +3,11 @@ import shared_pkg::*;
 module top();
     // Clock Generation
         bit clk;
+        localparam CLK_PERIOD = 2;
         initial begin
             clk = 1'b0;
             forever begin
-                clk = ~clk;
+                #(CLK_PERIOD/2)clk = ~clk;
             end
         end
 

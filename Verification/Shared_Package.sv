@@ -1,9 +1,3 @@
-/*
-    vsim -voptargs=+acc work.top -cover
-    coverage save coverage_db.ucdb -onexit
-    add wave /top/if_handle/*
-    run -all
-*/
 package shared_pkg;
     parameter FIFO_WIDTH = 16;
     parameter FIFO_DEPTH = 8;
