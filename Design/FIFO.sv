@@ -85,4 +85,58 @@ assign underflow = (empty && rd_en)? 1 : 0;
 assign almostfull = (count == FIFO_DEPTH-2)? 1 : 0; 
 assign almostempty = (count == 1)? 1 : 0;
 
+//------------ Combintional Assertions ------------//
+	always_comb begin
+	if (!rst_n) begin
+		RST_COUNT: assert (count == 0)
+			else $error("Assertion RST_COUNT failed!");
+		RST_RDPTR: assert (rd_ptr == 0)
+			else $error("Assertion RST_RDPTR failed!");
+		RST_WRPTR: assert (wr_ptr == 0)
+			else $error("Assertion RST_WRPTR failed!");	
+	end	
+
+	if (count == FIFO_DEPTH) begin
+		FULL_ASSERT: assert (full)
+			else $error("Assertion FULL_ASSERT failed!");
+	end
+
+	if (count == 0) begin
+		EMPTY_ASSERT: assert (empty)
+			else $error("Assertion EMPTY_ASSERT failed!");
+	end
+
+	if (count == FIFO_DEPTH - 2) begin
+		ALMOSTFULL_ASSERT: assert (almostfull)
+			else $error("Assertion ALMOSTFULL_ASSERT failed!");
+	end
+
+	if (count == 1) begin
+		ALMOSTEMPTY_ASSERT: assert (almostempty)
+			else $error("Assertion ALMOSTEMPTY_ASSERT failed!");
+	end
+	end
+
+//------------ Sequential Assertions ------------// 
+	UNDERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (empty && rd_en) |=> underflow)
+		else $error("Assertion UNDERFLOW_ASSERT failed!");
+
+	OVERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (full && wr_en) |=> overflow)
+		else $error("Assertion OVERFLOW_ASSERT failed!");
+
+	WRACK_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en) |=> wr_ack)
+		else $error("Assertion WRACK_ASSERT failed!");
+
+	RDPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (rd_en && count != 0) |=> (rd_ptr + 1))
+		else $error("Assertion RDPTR_ASSERT failed!");	
+
+	WRPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en && count < FIFO_DEPTH) |=> (wr_ptr+1))
+		else $error("Assertion WRPTR_ASSERT failed!");
+
+	COUNT_UP_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b10) && !full) |=> (count+1))
+		else $error("Assertion COUNT_UP_ASSERT failed!");
+
+	COUNT_DOWN_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b01) && !empty) |=> (count-1))
+		else $error("Assertion COUNT_DOWN_ASSERT failed!");	
+
 endmodule

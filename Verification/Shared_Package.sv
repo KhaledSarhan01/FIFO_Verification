@@ -1,6 +1,7 @@
 /*
     vsim -voptargs=+acc work.top -cover
     coverage save coverage_db.ucdb -onexit
+    add wave /top/if_handle/*
     run -all
 */
 package shared_pkg;
