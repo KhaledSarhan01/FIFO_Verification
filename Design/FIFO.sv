@@ -85,6 +85,7 @@ assign underflow = (empty && rd_en)? 1 : 0;
 assign almostfull = (count == FIFO_DEPTH-2)? 1 : 0; 
 assign almostempty = (count == 1)? 1 : 0;
 
+`ifdef ASSERTIONS
 //------------ Combintional Assertions ------------//
 	always_comb begin
 	if (!rst_n) begin
@@ -138,5 +139,5 @@ assign almostempty = (count == 1)? 1 : 0;
 
 	COUNT_DOWN_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b01) && !empty) |=> (count-1))
 		else $error("Assertion COUNT_DOWN_ASSERT failed!");	
-
+`endif
 endmodule
