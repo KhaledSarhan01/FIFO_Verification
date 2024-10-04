@@ -22,8 +22,8 @@ reg [FIFO_WIDTH-1:0] data_out;
 assign if_handle.data_out = data_out;
 
 reg wr_ack, overflow;
-assign if_handle.wr_ack = if_handle.wr_ack;
-assign if_handle.overflow = if_handle.overflow;
+assign if_handle.wr_ack = wr_ack;
+assign if_handle.overflow = overflow;
 
 wire full, empty, almostfull, almostempty, underflow;
 assign if_handle.full = full;

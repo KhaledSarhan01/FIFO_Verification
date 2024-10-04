@@ -1,7 +1,7 @@
 import shared_pkg::*;
 
 module FIFO_tb(FIFO_if.TEST if_handle);
-    FIFO_transaction F_txn;
+    FIFO_transaction F_txn = new();
     initial begin
         // Start of Verification
             $display("Start of Verification");
