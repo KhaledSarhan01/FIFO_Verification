@@ -171,6 +171,9 @@ package shared_pkg;
                         mem_ref[i] = 0;
                     end
                     data_out_ref = 0;
+                    rd_ptr_ref = 0;
+                    wr_ptr_ref = 0;
+                    count_ref = 0;
                 end else begin
                     if (F_txn.wr_en && count_ref < FIFO_DEPTH) begin
                         mem_ref[wr_ptr_ref] = F_txn.data_in;
