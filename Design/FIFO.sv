@@ -89,11 +89,11 @@ assign almostempty = (count == 1)? 1 : 0;
 //------------ Combintional Assertions ------------//
 	always_comb begin
 	if (!rst_n) begin
-		RST_COUNT: assert (count == 0)
+		RST_COUNT: assert final (count == 0)
 			else $error("Assertion RST_COUNT failed!");
-		RST_RDPTR: assert (rd_ptr == 0)
+		RST_RDPTR: assert final (rd_ptr == 0)
 			else $error("Assertion RST_RDPTR failed!");
-		RST_WRPTR: assert (wr_ptr == 0)
+		RST_WRPTR: assert final (wr_ptr == 0)
 			else $error("Assertion RST_WRPTR failed!");	
 	end	
 

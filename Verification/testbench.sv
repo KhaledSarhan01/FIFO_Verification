@@ -5,6 +5,7 @@ module FIFO_tb(FIFO_if.TEST if_handle);
     initial begin
         // Start of Verification
             $display("Start of Verification");
+            Initialization();
         // Reset Assert
             Reset_Assert();
         // Simple Randomization
@@ -29,5 +30,12 @@ module FIFO_tb(FIFO_if.TEST if_handle);
         if_handle.data_in   = F_txn.data_in ;
         if_handle.wr_en     = F_txn.wr_en; 
         if_handle.rd_en     = F_txn.rd_en;
+    endtask
+
+    task Initialization();
+        if_handle.rst_n     = 1;
+        if_handle.data_in   = 0 ;
+        if_handle.wr_en     = 0; 
+        if_handle.rd_en     = 0;
     endtask
 endmodule
