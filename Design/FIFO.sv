@@ -21,11 +21,11 @@ assign rd_en = if_handle.rd_en;
 reg [FIFO_WIDTH-1:0] data_out;
 assign if_handle.data_out = data_out;
 
-reg wr_ack, overflow;
+reg wr_ack, overflow,underflow;
 assign if_handle.wr_ack = wr_ack;
 assign if_handle.overflow = overflow;
 
-wire full, empty, almostfull, almostempty, underflow;
+wire full, empty, almostfull, almostempty;
 assign if_handle.full = full;
 assign if_handle.empty = empty;
 assign if_handle.almostfull = almostfull;
@@ -66,10 +66,17 @@ always @(posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
 		rd_ptr <= 0;
 		data_out <= 0; // BUG: No Value during Reset
+		underflow <= 0;
 	end
 	else if (rd_en && count != 0) begin
 		data_out <= mem[rd_ptr];
 		rd_ptr <= rd_ptr + 1;
+	end else begin	// BUG : Squential Output "Underflow" is Created
+		if (empty && rd_en) begin
+			underflow <= 1;
+		end else begin
+			underflow <= 0;
+		end
 	end
 end
 
@@ -87,7 +94,7 @@ end
 
 assign full = (count == FIFO_DEPTH)? 1 : 0;
 assign empty = (count == 0)? 1 : 0;
-assign underflow = (empty && rd_en)? 1 : 0; 
+//assign underflow = (empty && rd_en)? 1 : 0; //BUG : the Output is Squential 
 assign almostfull = (count == FIFO_DEPTH-2)? 1 : 0; 
 assign almostempty = (count == 1)? 1 : 0;
 
@@ -104,46 +111,46 @@ assign almostempty = (count == 1)? 1 : 0;
 	end	
 
 	if (count == FIFO_DEPTH) begin
-		FULL_ASSERT: assert (full)
+		FULL_ASSERT: assert final (full)
 			else $error("Assertion FULL_ASSERT failed!");
 	end
 
 	if (count == 0) begin
-		EMPTY_ASSERT: assert (empty)
+		EMPTY_ASSERT: assert final (empty)
 			else $error("Assertion EMPTY_ASSERT failed!");
 	end
 
 	if (count == FIFO_DEPTH - 2) begin
-		ALMOSTFULL_ASSERT: assert (almostfull)
+		ALMOSTFULL_ASSERT: assert final (almostfull)
 			else $error("Assertion ALMOSTFULL_ASSERT failed!");
 	end
 
 	if (count == 1) begin
-		ALMOSTEMPTY_ASSERT: assert (almostempty)
+		ALMOSTEMPTY_ASSERT: assert final (almostempty)
 			else $error("Assertion ALMOSTEMPTY_ASSERT failed!");
 	end
 	end
 
 //------------ Sequential Assertions ------------// 
-	UNDERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (empty && rd_en) |=> underflow)
+	UNDERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (empty && rd_en) |-> ##1 underflow)
 		else $error("Assertion UNDERFLOW_ASSERT failed!");
 
-	OVERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (full && wr_en) |=> overflow)
+	OVERFLOW_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (full && wr_en) |-> ##1 overflow)
 		else $error("Assertion OVERFLOW_ASSERT failed!");
 
-	WRACK_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en) |=> wr_ack)
+	WRACK_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en && !full) |-> ##1 wr_ack)
 		else $error("Assertion WRACK_ASSERT failed!");
 
-	RDPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (rd_en && count != 0) |=> (rd_ptr + 1))
+	RDPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (rd_en && count != 0) |-> ##1 (rd_ptr + 1))
 		else $error("Assertion RDPTR_ASSERT failed!");	
 
-	WRPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en && count < FIFO_DEPTH) |=> (wr_ptr+1))
+	WRPTR_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (wr_en && count < FIFO_DEPTH) |-> ##1 (wr_ptr+1))
 		else $error("Assertion WRPTR_ASSERT failed!");
 
-	COUNT_UP_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b10) && !full) |=> (count+1))
+	COUNT_UP_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b10) && !full) |-> ##1 (count == $past(count)+1))
 		else $error("Assertion COUNT_UP_ASSERT failed!");
 
-	COUNT_DOWN_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b01) && !empty) |=> (count-1))
+	COUNT_DOWN_ASSERT: assert property (@(posedge clk) disable iff(!rst_n) (({wr_en, rd_en} == 2'b01) && !empty) |-> ##1 (count == $past(count)-1))
 		else $error("Assertion COUNT_DOWN_ASSERT failed!");	
 `endif
 endmodule
