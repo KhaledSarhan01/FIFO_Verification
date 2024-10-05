@@ -42,6 +42,11 @@ reg [max_fifo_addr:0] count;
 always @(posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
 		wr_ptr <= 0;
+		overflow <= 0; 	// Bug: No Value during Reset 
+		wr_ack <= 0; 	// Bug: No Value during Reset
+		for (int i = 0; i < FIFO_DEPTH ; i++ ) begin 
+			mem[i] = 0; // Bug: No Values during Reset
+		end
 	end
 	else if (wr_en && count < FIFO_DEPTH) begin
 		mem[wr_ptr] <= data_in;
@@ -60,6 +65,7 @@ end
 always @(posedge clk or negedge rst_n) begin
 	if (!rst_n) begin
 		rd_ptr <= 0;
+		data_out <= 0; // BUG: No Value during Reset
 	end
 	else if (rd_en && count != 0) begin
 		data_out <= mem[rd_ptr];

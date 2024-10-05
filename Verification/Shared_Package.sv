@@ -161,6 +161,7 @@ package shared_pkg;
                 rd_ptr_ref = 0;
                 count_ref = 0;
             endfunction
+
             function void check_data(FIFO_transaction F_txn);
                 reference_model(F_txn);
                 if (F_txn.data_out != data_out_ref) begin
@@ -182,11 +183,13 @@ package shared_pkg;
                     count_ref = 0;
                 end else begin
                     if (F_txn.wr_en && count_ref < FIFO_DEPTH) begin
-                        mem_ref[wr_ptr_ref] = F_txn.data_in;
-                        count_ref = count_ref +1;
+                        mem_ref[wr_ptr_ref] <= F_txn.data_in;
+                        count_ref <= count_ref +1;
+                        wr_ptr_ref <= wr_ptr_ref +1;
                     end else if (F_txn.rd_en && count_ref != 0) begin
-                        data_out_ref = mem_ref[rd_ptr_ref];
-                        count_ref = count_ref -1;
+                        data_out_ref <= mem_ref[rd_ptr_ref];
+                        count_ref <= count_ref -1;
+                        rd_ptr_ref <= rd_ptr_ref +1;
                     end 
                 end
             endfunction
