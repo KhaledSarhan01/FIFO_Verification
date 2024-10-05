@@ -9,7 +9,7 @@ module FIFO_tb(FIFO_if.TEST if_handle);
         // Reset Assert
             Reset_Assert();
         // Simple Randomization
-            repeat(100)begin
+            repeat(1000)begin
                 @(negedge if_handle.clk);
                 assert(F_txn.randomize());
                 Stimulus();

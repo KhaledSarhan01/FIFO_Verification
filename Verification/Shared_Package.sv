@@ -121,12 +121,25 @@ package shared_pkg;
                     option.weight=0;    
                 }
             // Cross Coverage
-                RD_EMPTY: cross RD_EN,UNDERFLOW,EMPTY,ALMOST_EMPTY;
-                RD_FULL: cross RD_EN,OVERFLOW,FULL,ALMOST_FULL;
-                RD_EN_ACK: cross RD_EN,WR_ACK;
-                WR_EMPTY: cross WR_EN,UNDERFLOW,EMPTY,ALMOST_EMPTY;
-                WR_FULL: cross WR_EN,OVERFLOW,FULL,ALMOST_FULL;
-                WR_EN_ACK: cross WR_EN,WR_ACK;        
+                RD_EMPTY: cross RD_EN,UNDERFLOW,EMPTY,ALMOST_EMPTY{
+                    ignore_bins NOT_EMPTY =  binsof(EMPTY.EMPTY_NO) && binsof(UNDERFLOW.UNDERFLOW_YES)
+                                          || binsof(ALMOST_EMPTY.ALMOST_EMPTY_YES) && binsof(EMPTY.EMPTY_YES);
+                }
+                RD_FULL: cross RD_EN,OVERFLOW,FULL,ALMOST_FULL{
+                    ignore_bins NOT_FULL =  binsof(FULL.FULL_NO) && binsof(OVERFLOW.OVERFLOW_YES)
+                                          || binsof(ALMOST_FULL.ALMOST_FULL_YES) && binsof(FULL.FULL_YES);
+                }
+                WR_EMPTY: cross WR_EN,UNDERFLOW,EMPTY,ALMOST_EMPTY{
+                    ignore_bins NOT_EMPTY =  binsof(EMPTY.EMPTY_NO) && binsof(UNDERFLOW.UNDERFLOW_YES)
+                                          || binsof(ALMOST_EMPTY.ALMOST_EMPTY_YES) && binsof(EMPTY.EMPTY_YES);
+                }
+                WR_FULL: cross WR_EN,OVERFLOW,FULL,ALMOST_FULL{
+                    ignore_bins NOT_FULL =  binsof(FULL.FULL_NO) && binsof(OVERFLOW.OVERFLOW_YES)
+                                          || binsof(ALMOST_FULL.ALMOST_FULL_YES) && binsof(FULL.FULL_YES);
+                }
+                
+                WR_EN_ACK: cross WR_EN,WR_ACK;
+                RD_EN_ACK: cross RD_EN,WR_ACK;        
         endgroup
 
         // Functions  

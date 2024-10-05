@@ -40,6 +40,12 @@ R0
 R0
 R0
 R0
+R0
+R0
+R0
+R0
+R0
+R0
 !s11f MIXED_VERSIONS
 13
 !s112 1.1
@@ -49,10 +55,10 @@ R0
 cModel Technology
 dD:/Digital/Kareem Waseem/Week 2/Assignment/Q3_Counter/Simulation
 T_opt
-Z1 !s110 1728142384
-VB?04:Vd43k?3C]K=3b;J50
+Z1 !s110 1728143416
+VWzl;kL=PmJR8TIBLGOnJQ1
 04 3 4 work top fast 0
-=46-902e161d0c93-67015c30-1e7-14d0
+=52-902e161d0c93-67016038-241-14d0
 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work work +acc
 Z2 tCvgOpt 0
@@ -69,14 +75,14 @@ Z4 dD:/Digital/Kareem Waseem/Project/Simulation
 w1728141423
 8../Design/FIFO.sv
 F../Design/FIFO.sv
-!i122 71
+!i122 77
 L0 8 149
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 Z6 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z7 !s108 1728142384.000000
+Z7 !s108 1728143416.000000
 Z8 !s107 ../Verification/top.sv|../Design/FIFO.sv|../Verification/testbench.sv|../Verification/monitor.sv|../Verification/interface.sv|../Verification/Shared_Package.sv|
 Z9 !s90 -reportprogress|300|-f|sourcefile.txt|+cover|-covercells|+define+ASSERTIONS|
 !i113 0
@@ -96,7 +102,7 @@ R4
 w1727082952
 8../Verification/interface.sv
 F../Verification/interface.sv
-!i122 71
+!i122 77
 Z13 L0 1 0
 R5
 R6
@@ -114,7 +120,7 @@ R2
 n@f@i@f@o_if
 vFIFO_MONITOR
 R3
-Z14 DXx4 work 10 shared_pkg 0 22 QaLlFSTn2cMdOn=5W]Nh30
+Z14 DXx4 work 10 shared_pkg 0 22 YBHlo^CL6?Y><f4>n<mEi3
 DXx4 work 15 monitor_sv_unit 0 22 =?9PXd1_4PS4=WX7B49:j2
 R1
 R5
@@ -129,7 +135,7 @@ R4
 Z15 w1728126790
 Z16 8../Verification/monitor.sv
 Z17 F../Verification/monitor.sv
-!i122 71
+!i122 77
 L0 3 34
 R6
 31
@@ -157,10 +163,10 @@ I@^lJaX630m?1U@he8C1531
 !s105 testbench_sv_unit
 S1
 R4
-Z18 w1728142381
+Z18 w1728142433
 Z19 8../Verification/testbench.sv
 Z20 F../Verification/testbench.sv
-!i122 71
+!i122 77
 L0 3 40
 R6
 31
@@ -189,7 +195,7 @@ R4
 R15
 R16
 R17
-!i122 71
+!i122 77
 R13
 R6
 31
@@ -205,16 +211,16 @@ Xshared_pkg
 R3
 R1
 !i10b 1
-!s100 a7b<IXZZCj8Tz?<c`V[`J0
-IQaLlFSTn2cMdOn=5W]Nh30
+!s100 ;4Y[:K9;kM^hC3KBf?;J32
+IYBHlo^CL6?Y><f4>n<mEi3
 S1
 R4
-w1728142339
+w1728143412
 8../Verification/Shared_Package.sv
 F../Verification/Shared_Package.sv
-!i122 71
+!i122 77
 R13
-VQaLlFSTn2cMdOn=5W]Nh30
+VYBHlo^CL6?Y><f4>n<mEi3
 R6
 r1
 !s85 0
@@ -244,7 +250,7 @@ R4
 R18
 R19
 R20
-!i122 71
+!i122 77
 R13
 R6
 31
@@ -274,7 +280,7 @@ R4
 Z21 w1728123115
 Z22 8../Verification/top.sv
 Z23 F../Verification/top.sv
-!i122 71
+!i122 77
 L0 3 23
 R6
 31
@@ -303,7 +309,7 @@ R4
 R21
 R22
 R23
-!i122 71
+!i122 77
 R13
 R6
 31
