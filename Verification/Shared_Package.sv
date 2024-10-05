@@ -175,22 +175,30 @@ package shared_pkg;
             function void reference_model(FIFO_transaction F_txn);
                 if(!(F_txn.rst_n))begin
                     for (int i = 0; i < FIFO_DEPTH; i++ ) begin
-                        mem_ref[i] = 0;
+                        mem_ref[i] <= 0;
                     end
-                    data_out_ref = 0;
-                    rd_ptr_ref = 0;
-                    wr_ptr_ref = 0;
-                    count_ref = 0;
+                    data_out_ref <= 0;
+                    rd_ptr_ref <= 0;
+                    wr_ptr_ref <= 0;
+                    count_ref <= 0;
                 end else begin
+                // Input Logic
                     if (F_txn.wr_en && count_ref < FIFO_DEPTH) begin
                         mem_ref[wr_ptr_ref] <= F_txn.data_in;
-                        count_ref <= count_ref +1;
                         wr_ptr_ref <= wr_ptr_ref +1;
-                    end else if (F_txn.rd_en && count_ref != 0) begin
+                    end 
+                
+                // Output Logic    
+                    if (F_txn.rd_en && count_ref != 0) begin
                         data_out_ref <= mem_ref[rd_ptr_ref];
-                        count_ref <= count_ref -1;
                         rd_ptr_ref <= rd_ptr_ref +1;
                     end 
+
+                // Counter Logic    
+                    if	( ({F_txn.wr_en, F_txn.rd_en} == 2'b10) && !F_txn.full) 
+			            count_ref <= count_ref + 1;
+                    else if ( ({F_txn.wr_en, F_txn.rd_en} == 2'b01) && !F_txn.empty)
+                        count_ref <= count_ref - 1;
                 end
             endfunction
     endclass
