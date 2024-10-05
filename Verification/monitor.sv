@@ -1,13 +1,10 @@
 import shared_pkg::*;
 
 module FIFO_MONITOR(FIFO_if.MONITOR if_handle);
-    FIFO_transaction F_txn;
-    FIFO_scoreboard F_score;
-    FIFO_coverage   F_cvg;
+    FIFO_transaction F_txn = new();
+    FIFO_scoreboard F_score = new();
+    FIFO_coverage   F_cvg = new();
     initial begin
-        F_txn = new();
-        F_cvg = new();
-        F_score = new();
         forever begin
             @(negedge if_handle.clk);
             SAMPLE_DATA();

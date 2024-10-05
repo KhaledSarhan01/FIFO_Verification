@@ -50,6 +50,10 @@ package shared_pkg;
                         RD_EN_ON_DIST = RD_EN_ON_DIST_i;
                         WR_EN_ON_DIST = WR_EN_ON_DIST_i;
                 endfunction 
+            
+            function void scoreboard();
+                $display("SCOREBOARD: Correct = %0d, Error =%0d ,Total = %0d",correct_count,error_count,correct_count+error_count);
+            endfunction
     endclass 
 
     class FIFO_coverage;
@@ -57,6 +61,8 @@ package shared_pkg;
             
         // Coverage Groups
         covergroup F_cvg_grp;
+            option.per_instance = 1;
+            
             // Inputs 
                 RD_EN:coverpoint F_cvg_txn.rd_en {
                     bins RD_EN_ON  = {1'b1};
@@ -123,9 +129,15 @@ package shared_pkg;
                 WR_EN_ACK: cross WR_EN,WR_ACK;        
         endgroup
 
-        // Functions    
+        // Functions  
+        function new();
+            F_cvg_grp = new();
+            F_cvg_grp.start();
+        endfunction  
+
         function void sample_data(FIFO_transaction F_txn);
-            F_cvg_txn = F_cvg_txn;
+            F_cvg_txn = F_txn;
+            this.F_cvg_grp.sample();
         endfunction
         
     endclass

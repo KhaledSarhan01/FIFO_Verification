@@ -16,6 +16,7 @@ module FIFO_tb(FIFO_if.TEST if_handle);
             end
         // End of Verification
             $display("End of Verification");
+            F_txn.scoreboard();
             $stop;
     end
 
