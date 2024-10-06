@@ -46,6 +46,8 @@ R0
 R0
 R0
 R0
+R0
+R0
 !s11f MIXED_VERSIONS
 13
 !s112 1.1
@@ -55,18 +57,18 @@ R0
 cModel Technology
 dD:/Digital/Kareem Waseem/Week 2/Assignment/Q3_Counter/Simulation
 T_opt
-Z1 !s110 1728143416
-VWzl;kL=PmJR8TIBLGOnJQ1
+!s110 1728145121
+V_1Y:CjYhC^hFYJH4D0l`Q3
 04 3 4 work top fast 0
-=52-902e161d0c93-67016038-241-14d0
+=3-902e161d0c93-670166e0-3af-60b8
 !s124 OEM100
 o-quiet -auto_acc_if_foreign -work work +acc
-Z2 tCvgOpt 0
+Z1 tCvgOpt 0
 n@_opt
 OL;O;2021.1;73
 vFIFO
-Z3 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
-R1
+Z2 DXx6 sv_std 3 std 0 22 9oUSJO;AeEaW`l:M@^WG92
+Z3 !s110 1728145120
 !i10b 1
 !s100 :E3nCHfm4A@G6mR9fNjU10
 IzHfn=W[Pg1g3b3bRC>L6n2
@@ -75,25 +77,25 @@ Z4 dD:/Digital/Kareem Waseem/Project/Simulation
 w1728141423
 8../Design/FIFO.sv
 F../Design/FIFO.sv
-!i122 77
+!i122 80
 L0 8 149
 Z5 VDg1SIo80bB@j0V0VzS_@n1
 Z6 OL;L;2021.1;73
 r1
 !s85 0
 31
-Z7 !s108 1728143416.000000
+Z7 !s108 1728145120.000000
 Z8 !s107 ../Verification/top.sv|../Design/FIFO.sv|../Verification/testbench.sv|../Verification/monitor.sv|../Verification/interface.sv|../Verification/Shared_Package.sv|
 Z9 !s90 -reportprogress|300|-f|sourcefile.txt|+cover|-covercells|+define+ASSERTIONS|
 !i113 0
 Z10 !s102 +cover -covercells
 Z11 o+cover -covercells -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 Z12 !s92 +cover -covercells +define+ASSERTIONS -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R2
+R1
 n@f@i@f@o
 YFIFO_if
+R2
 R3
-R1
 !i10b 1
 !s100 CIcozBK0FjIB8YF7ZIE1B2
 IV[3TKF84jm=>`@:IeljME0
@@ -102,7 +104,7 @@ R4
 w1727082952
 8../Verification/interface.sv
 F../Verification/interface.sv
-!i122 77
+!i122 80
 Z13 L0 1 0
 R5
 R6
@@ -116,13 +118,13 @@ R9
 R10
 R11
 R12
-R2
+R1
 n@f@i@f@o_if
 vFIFO_MONITOR
-R3
+R2
 Z14 DXx4 work 10 shared_pkg 0 22 YBHlo^CL6?Y><f4>n<mEi3
 DXx4 work 15 monitor_sv_unit 0 22 =?9PXd1_4PS4=WX7B49:j2
-R1
+R3
 R5
 r1
 !s85 0
@@ -135,7 +137,7 @@ R4
 Z15 w1728126790
 Z16 8../Verification/monitor.sv
 Z17 F../Verification/monitor.sv
-!i122 77
+!i122 80
 L0 3 34
 R6
 31
@@ -146,14 +148,14 @@ R9
 R10
 R11
 R12
-R2
+R1
 n@f@i@f@o_@m@o@n@i@t@o@r
 vFIFO_tb
-R3
-R3
+R2
+R2
 R14
 DXx4 work 17 testbench_sv_unit 0 22 `WHSY6?CcBEaG_PHkRRYf0
-R1
+R3
 R5
 r1
 !s85 0
@@ -163,10 +165,10 @@ I@^lJaX630m?1U@he8C1531
 !s105 testbench_sv_unit
 S1
 R4
-Z18 w1728142433
+Z18 w1728145117
 Z19 8../Verification/testbench.sv
 Z20 F../Verification/testbench.sv
-!i122 77
+!i122 80
 L0 3 40
 R6
 31
@@ -177,12 +179,12 @@ R9
 R10
 R11
 R12
-R2
+R1
 n@f@i@f@o_tb
 Xmonitor_sv_unit
-R3
+R2
 R14
-R1
+R3
 V=?9PXd1_4PS4=WX7B49:j2
 r1
 !s85 0
@@ -195,7 +197,7 @@ R4
 R15
 R16
 R17
-!i122 77
+!i122 80
 R13
 R6
 31
@@ -206,10 +208,10 @@ R9
 R10
 R11
 R12
-R2
-Xshared_pkg
-R3
 R1
+Xshared_pkg
+R2
+R3
 !i10b 1
 !s100 ;4Y[:K9;kM^hC3KBf?;J32
 IYBHlo^CL6?Y><f4>n<mEi3
@@ -218,7 +220,7 @@ R4
 w1728143412
 8../Verification/Shared_Package.sv
 F../Verification/Shared_Package.sv
-!i122 77
+!i122 80
 R13
 VYBHlo^CL6?Y><f4>n<mEi3
 R6
@@ -232,12 +234,12 @@ R9
 R10
 R11
 R12
-R2
-Xtestbench_sv_unit
-R3
-R3
-R14
 R1
+Xtestbench_sv_unit
+R2
+R2
+R14
+R3
 V`WHSY6?CcBEaG_PHkRRYf0
 r1
 !s85 0
@@ -250,7 +252,7 @@ R4
 R18
 R19
 R20
-!i122 77
+!i122 80
 R13
 R6
 31
@@ -261,13 +263,13 @@ R9
 R10
 R11
 R12
-R2
+R1
 vtop
-R3
-R3
+R2
+R2
 R14
 DXx4 work 11 top_sv_unit 0 22 ;iR>9NN2_?FE^ZZHkO9AR0
-R1
+R3
 R5
 r1
 !s85 0
@@ -280,7 +282,7 @@ R4
 Z21 w1728123115
 Z22 8../Verification/top.sv
 Z23 F../Verification/top.sv
-!i122 77
+!i122 80
 L0 3 23
 R6
 31
@@ -291,12 +293,12 @@ R9
 R10
 R11
 R12
-R2
-Xtop_sv_unit
-R3
-R3
-R14
 R1
+Xtop_sv_unit
+R2
+R2
+R14
+R3
 V;iR>9NN2_?FE^ZZHkO9AR0
 r1
 !s85 0
@@ -309,7 +311,7 @@ R4
 R21
 R22
 R23
-!i122 77
+!i122 80
 R13
 R6
 31
@@ -320,4 +322,4 @@ R9
 R10
 R11
 R12
-R2
+R1

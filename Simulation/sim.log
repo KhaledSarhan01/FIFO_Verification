@@ -1,0 +1,116 @@
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# Saving coverage database on exit...
+# End time: 19:17:35 on Oct 05,2024, Elapsed time: 17:29:34
+# Errors: 3, Warnings: 1
+# vsim -voptargs="+acc" work.top -coverage -sv_seed random -l sim.log 
+# Start time: 19:17:35 on Oct 05,2024
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.shared_pkg(fast)
+# Loading work.top_sv_unit(fast)
+# Loading work.top(fast)
+# Loading work.FIFO_if(fast__1)
+# Loading work.FIFO(fast)
+# Loading work.testbench_sv_unit(fast)
+# Loading work.FIFO_tb(fast)
+# Loading work.monitor_sv_unit(fast)
+# Loading work.FIFO_MONITOR(fast)
+# Sv_Seed = 2915873625
+do reset.do
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:17:59 on Oct 05,2024
+# vlog -reportprogress 300 -f sourcefile.txt "+cover" -covercells "+define+ASSERTIONS" 
+# -- Compiling package shared_pkg
+# -- Compiling interface FIFO_if
+# -- Compiling package monitor_sv_unit
+# -- Importing package shared_pkg
+# -- Compiling module FIFO_MONITOR
+# -- Compiling package testbench_sv_unit
+# -- Compiling module FIFO_tb
+# -- Compiling module FIFO
+# -- Compiling package top_sv_unit
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 19:17:59 on Oct 05,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-8009) Loading existing optimized design _opt
+# Loading sv_std.std
+# Loading work.shared_pkg(fast)
+# Loading work.top_sv_unit(fast)
+# Loading work.top(fast)
+# Loading work.FIFO_if(fast__1)
+# Loading work.FIFO(fast)
+# Loading work.testbench_sv_unit(fast)
+# Loading work.FIFO_tb(fast)
+# Loading work.monitor_sv_unit(fast)
+# Loading work.FIFO_MONITOR(fast)
+# Start of Verification
+# End of Verification
+# SCOREBOARD: Correct = 10000, Error =0 ,Total = 10000
+# ** Note: $stop    : ../Verification/testbench.sv(20)
+#    Time: 20002 ns  Iteration: 1  Instance: /top/Testbench
+# Break in Module FIFO_tb at ../Verification/testbench.sv line 20
+coverage exclude -src ../Design/FIFO.sv -scope /top/DUT -line 58 -code c
+do reset.do
+# QuestaSim-64 vlog 2021.1 Compiler 2021.01 Jan 19 2021
+# Start time: 19:18:40 on Oct 05,2024
+# vlog -reportprogress 300 -f sourcefile.txt "+cover" -covercells "+define+ASSERTIONS" 
+# -- Compiling package shared_pkg
+# -- Compiling interface FIFO_if
+# -- Compiling package monitor_sv_unit
+# -- Importing package shared_pkg
+# -- Compiling module FIFO_MONITOR
+# -- Compiling package testbench_sv_unit
+# -- Compiling module FIFO_tb
+# -- Compiling module FIFO
+# -- Compiling package top_sv_unit
+# -- Compiling module top
+# 
+# Top level modules:
+# 	top
+# End time: 19:18:40 on Oct 05,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading sv_std.std
+# Loading work.shared_pkg(fast)
+# Loading work.top_sv_unit(fast)
+# Loading work.top(fast)
+# Loading work.FIFO_if(fast__1)
+# Loading work.FIFO(fast)
+# Loading work.testbench_sv_unit(fast)
+# Loading work.FIFO_tb(fast)
+# Loading work.monitor_sv_unit(fast)
+# Loading work.FIFO_MONITOR(fast)
+# Start of Verification
+# End of Verification
+# SCOREBOARD: Correct = 1000, Error =0 ,Total = 1000
+# ** Note: $stop    : ../Verification/testbench.sv(20)
+#    Time: 2002 ns  Iteration: 1  Instance: /top/Testbench
+# Break in Module FIFO_tb at ../Verification/testbench.sv line 20
+do done.do
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# ** Error: Acs sdne.
+# 
+#        Unable to replace existing ini file (D:/Digital/Kareem Waseem/Project/Simulation/FIFO_PROJECT.mpf).  File can not be renamed.
+# End time: 19:19:14 on Oct 05,2024, Elapsed time: 0:01:39
+# Errors: 3, Warnings: 1
+# QuestaSim-64 vcover 2021.1 Coverage Utility 2021.01 Jan 19 2021
+# Start time: 19:19:15 on Oct 05,2024
+# vcover report coverage_db.ucdb -details -annotate -all -output ../Verification/coverage_report.txt 
+# End time: 19:19:15 on Oct 05,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
