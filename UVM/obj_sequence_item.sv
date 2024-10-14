@@ -7,13 +7,13 @@ package seq_item_pkg;
         `uvm_object_utils(FIFO_seq_item)
 
     //----------------- Sequence Item Signals ------------------//
-        bit [FIFO_WIDTH-1:0] data_in;
-        bit rst_n, wr_en, rd_en;
+        rand logic [FIFO_WIDTH-1:0] data_in;
+        rand logic rst_n, wr_en, rd_en;
 
-        bit [FIFO_WIDTH-1:0] data_out;
-        bit wr_ack;
-        bit full, almostfull, overflow;
-        bit empty, almostempty, underflow;
+        rand logic [FIFO_WIDTH-1:0] data_out;
+        rand logic wr_ack;
+        rand logic full, almostfull, overflow;
+        rand logic empty, almostempty, underflow;
 
         int RD_EN_ON_DIST , WR_EN_ON_DIST;      
     //---------------- Sequence Item Functions ------------------//
@@ -24,9 +24,7 @@ package seq_item_pkg;
         endfunction
 
         function string convert2string();
-            return $sformatf("Data_Out = %d , wr_ack = %1b  
-                            | Full Flags: full = %1b , almostfull = %1b , overflow = %1b
-                            | Empty Flags: empty = %1b , almostempty = %1b , underflow = %1b",
+            return $sformatf("Data_Out = %d , wr_ack = %1b | Full Flags: full = %1b , almostfull = %1b , overflow = %1b | Empty Flags: empty = %1b , almostempty = %1b , underflow = %1b",
                             data_out,wr_ack,full, almostfull, overflow,empty, almostempty, underflow);
         endfunction 
 
