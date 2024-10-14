@@ -1,5 +1,8 @@
 ../UVM/obj_sequence_item.sv
 ../UVM/obj_config.sv
+../UVM/C_sequencer.sv
+../UVM/C_Monitor.sv
+../UVM/C_Driver.sv
 ../UVM/CE_Agent.sv
 ../UVM/CE_coverage_collecter.sv
 ../UVM/CE_Scoreboard.sv

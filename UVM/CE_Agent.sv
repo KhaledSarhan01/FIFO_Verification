@@ -1,7 +1,7 @@
 package agent_pkg;
-    //import dirver_pkg::*;
-    //import sequencer_pkg::*;
-    //import monitor_pkg::*;
+    import dirver_pkg::*;
+    import sequencer_pkg::*;
+    import monitor_pkg::*;
     import config_pkg::*;
     import seq_item_pkg::*;
 
@@ -10,18 +10,18 @@ package agent_pkg;
 
     class FIFO_Agent extends uvm_agent;
         `uvm_component_utils(FIFO_Agent);
-    /*
+    
         FIFO_driver driver;
         FIFO_sequencer sequencer;
         FIFO_monitor monitor;
-    */    
+    
         FIFO_config_obj agent_config;
         uvm_analysis_port #(FIFO_seq_item) agent_aport;
     
         function new(string name = "FIFO_Agent", uvm_component parent = null);
             super.new(name,parent);
         endfunction 
-    /*
+    
         function void build_phase(uvm_phase phase);
             super.build_phase(phase);
             driver      = FIFO_driver::type_id::create("driver",this);
@@ -41,7 +41,7 @@ package agent_pkg;
             driver.seq_item_port.connect(sequencer.seq_item_export);
             monitor.monitor_aport.connect(agent_aport);
         endfunction
-    */
+
     endclass //FIFO_Agent extends uvm_agnet
 endpackage
 
