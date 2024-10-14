@@ -7,6 +7,7 @@
 ../UVM/CE_coverage_collecter.sv
 ../UVM/CE_Scoreboard.sv
 ../UVM/env.sv
+../UVM/Test_Sequence.sv
 ../UVM/test.sv
 ../Verification/interface.sv
 ../Design/FIFO_uvm.sv

@@ -1,7 +1,7 @@
 package test_pkg;
     import env_pkg::*;
     import config_pkg::*;
-    //import test_sequence_pkg::*;
+    import test_sequence_pkg::*;
     import uvm_pkg ::*;
     `include "uvm_macros.svh"
 
@@ -10,10 +10,10 @@ package test_pkg;
     
         FIFO_env env;
         FIFO_config_obj FIFO_config_obj_test;
-    /*  reset_sequence rst_seq; 
-        sequence_0 seq_0;
-        sequence_1 seq_1;
-    */
+        reset_sequence rst_seq; 
+        main_sequence main_seq;
+        
+
         function new(string name = "FIFO_test",uvm_component parent = null);
             super.new(name,parent);
         endfunction
@@ -22,9 +22,9 @@ package test_pkg;
             super.build_phase(phase);
             // Building the Environment
             env = FIFO_env :: type_id :: create("env",this);
-            //rst_seq = reset_sequence :: type_id :: create("rst_seq");
-            //seq_0   = sequence_0     :: type_id :: create("seq_0");
-            //seq_1   = sequence_1     :: type_id :: create("seq_1");
+            rst_seq  = reset_sequence :: type_id :: create("rst_seq");
+            main_seq = main_sequence     :: type_id :: create("main_seq");
+           
 
             // Passing the Configuraitons
             FIFO_config_obj_test = FIFO_config_obj::type_id::create("FIFO_config_obj_test");
@@ -37,16 +37,12 @@ package test_pkg;
             super.run_phase(phase);
             phase.raise_objection(this);
                 `uvm_info("TEST RUN","Reset Assert",UVM_LOW);
-                //rst_seq.start(env.agent.sequencer);
+                rst_seq.start(env.agent.sequencer);
                 `uvm_info("TEST RUN","Reset Deassert",UVM_LOW);
 
-                `uvm_info("TEST RUN","Test 1 Sequence begin",UVM_LOW);
-                //seq_0.start(env.agent.sequencer);
-                `uvm_info("TEST RUN","Test 1 Sequence end",UVM_LOW);
-
-                `uvm_info("TEST RUN","Test 2 Sequence begin",UVM_LOW);
-                //seq_1.start(env.agent.sequencer);
-                `uvm_info("TEST RUN","Test 2 Sequence end",UVM_LOW);
+                `uvm_info("TEST RUN","Main Test Sequence begin",UVM_LOW);
+                main_seq.start(env.agent.sequencer);
+                `uvm_info("TEST RUN","Main Test Sequence end",UVM_LOW);
             phase.drop_objection(this);
         endtask 
     endclass
