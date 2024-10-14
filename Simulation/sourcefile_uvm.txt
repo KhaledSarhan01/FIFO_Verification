@@ -1,5 +1,6 @@
 ../UVM/obj_sequence_item.sv
 ../UVM/obj_config.sv
+../UVM/env.sv
 ../UVM/test.sv
 ../Verification/interface.sv
 ../Design/FIFO_uvm.sv
