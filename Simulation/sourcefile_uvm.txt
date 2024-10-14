@@ -1,3 +1,4 @@
+../UVM/SVA.sv
 ../UVM/obj_sequence_item.sv
 ../UVM/obj_config.sv
 ../UVM/C_sequencer.sv

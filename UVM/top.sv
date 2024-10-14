@@ -17,7 +17,12 @@ module top;
 
     // Instatiation
         FIFO DUT (if_handle);
-
+    
+    // Assertion
+    `ifdef ASSERTIONS
+        bind FIFO FIFO_SVA FIFO_SVA_instance(if_handle); 
+    `endif
+     
     // UVM Environment
         initial begin
             uvm_config_db #(virtual FIFO_if)::set(null,"uvm_test_top","top_FIFO_if",if_handle); 
