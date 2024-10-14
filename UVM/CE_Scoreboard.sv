@@ -13,7 +13,7 @@ package scoreboard_pkg;
             int correct_count = 0;
             int error_count = 0;
         // Outputs
-            bit [FIFO_WIDTH-1:0] data_out_ref;
+            logic [FIFO_WIDTH-1:0] data_out_ref;
         //---------- Functions ----------//    
         function new(string name = "FIFO_Scoreboard",uvm_component parent = null);
             super.new(name,parent);

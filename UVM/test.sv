@@ -43,6 +43,8 @@ package test_pkg;
                 `uvm_info("TEST RUN","Main Test Sequence begin",UVM_LOW);
                 main_seq.start(env.agent.sequencer);
                 `uvm_info("TEST RUN","Main Test Sequence end",UVM_LOW);
+
+                `uvm_info("TEST END",$sformatf("SCOREBOARD: Correct = %0d , Error = %0d",env.scoreboard.correct_count,env.scoreboard.error_count),UVM_LOW);
             phase.drop_objection(this);
         endtask 
     endclass
